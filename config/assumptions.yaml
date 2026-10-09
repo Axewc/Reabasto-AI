@@ -1,0 +1,33 @@
+# Declared assumptions: the dataset has no costs, lead times or on-hand stock.
+# Every number here is adjustable and is repeated in the README.
+horizon:
+  review_days: 1            # daily inventory review (R)
+  lead_time_days:           # L; planning horizon H = L + R
+    perishable: 3
+    non_perishable: 7
+
+service_level: 0.90         # maps to the P90 quantile
+
+families:
+  GROCERY I:
+    perishable: false
+    unit_cost_mxn: 25.0
+    holding_cost_daily_pct: 0.0005
+    stockout_margin_mxn: 6.0
+  DAIRY:
+    perishable: true
+    unit_cost_mxn: 30.0
+    holding_cost_daily_pct: 0.002
+    stockout_margin_mxn: 8.0
+
+simulation:
+  initial_inventory: order_up_to_level
+  rounding: ceil            # KG items rounded to one decimal
+
+split:
+  train_start: 2016-01-01
+  train_end: 2017-03-28
+  valid_start: 2017-03-29
+  valid_end: 2017-05-23
+  sim_start: 2017-05-24
+  sim_end: 2017-08-15

@@ -1,0 +1,29 @@
+# secrets
+.env
+*.key
+.kaggle/
+
+# data and runtime artifacts
+data/
+inbox/
+outbox/
+processed/
+rejected/
+mlruns/
+mlflow.db
+*.sqlite
+*.sqlite3
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/

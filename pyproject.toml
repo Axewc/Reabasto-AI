@@ -1,0 +1,46 @@
+[project]
+name = "reabasto"
+version = "0.1.0"
+description = "Probabilistic replenishment planning with human approval and audit trail"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "polars>=1.0",
+    "pyarrow>=17",
+    "duckdb>=1.1",
+    "sqlglot>=25",
+    "google-cloud-bigquery>=3.25",
+    "xgboost>=2.1",
+    "scikit-learn>=1.5",
+    "mlflow>=3.0",
+    "anthropic>=0.40",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "pyyaml>=6",
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "python-multipart>=0.0.9",
+    "httpx>=0.27",
+    "streamlit>=1.38",
+]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/reabasto"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

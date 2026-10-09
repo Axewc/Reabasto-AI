@@ -93,10 +93,10 @@ Son 54 tiendas y unos 125 millones de filas. Los archivos vienen comprimidos en 
 
 **Recorte.**
 - Periodo del 2016-01-01 al 2017-08-15, que es el fin del dataset. Así se evitan los años con promoción nula.
-- 5 tiendas con venta todos los días del periodo, sin aperturas ni cierres.
+- 5 tiendas abiertas todos los días del tramo de entrenamiento salvo los cierres nacionales (2016-01-01, 2016-12-25 y 2017-01-01, detectados porque casi ninguna tienda reporta venta); entre ellas, las de mayor volumen.
 - 2 familias: GROCERY I (no perecedera) y DAIRY (perecedera).
 - Los ~100 artículos más vendidos de cada familia, **elegidos solo con datos de entrenamiento**. Si se eligen con todo el periodo, se filtra información del futuro.
-- En total, unas 1,000 series tienda-artículo y unas 600 mil filas. Se usa `polars.scan_csv` con los filtros antes de `collect()`.
+- En total, unas 1,000 series tienda-artículo y unas 600 mil filas. Como el disco no alcanza para el CSV descomprimido (~5 GB), `7zz e -so` descomprime a una tubería y `pyarrow.csv.open_csv` filtra por lotes; solo el recorte se escribe a Parquet. Polars (`scan_parquet`, lazy) hace la selección y la limpieza sobre ese recorte.
 
 **Cortes temporales.**
 
